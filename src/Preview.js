@@ -9,7 +9,11 @@ export default function Preview ({ images, onUpdateImages }) {
   const onSortEnd = ({oldIndex, newIndex}) => {
     onUpdateImages(arrayMove(images, oldIndex, newIndex))
   }
-  return <ImageList images={images} onSortEnd={onSortEnd} helperClass="grabbing" />
+  return <ImageList
+            images={images}
+            onSortEnd={onSortEnd}
+            helperClass="grabbing"
+            useWindowAsScrollContainer />
 }
 const ImageList = SortableContainer(({ images }) => {
   return (
