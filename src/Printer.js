@@ -7,8 +7,7 @@ export default function Printer ({ images }) {
   const [ printed, setPrinted ] = useState(false)
   useEffect(() => {
     if (!printed) {
-      const result = window.print()
-      console.log('result', result)
+      window.print()
       setPrinted(true)
     }
   }, [printed])

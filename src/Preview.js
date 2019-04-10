@@ -1,5 +1,5 @@
 import React  from 'react'
-import { BrowserRouter as Router, withRouter, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import arrayMove from 'array-move'
 import './Preview.css'
