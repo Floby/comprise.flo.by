@@ -1,0 +1,44 @@
+.Preview {
+  text-align: left;
+  margin: 1em;
+}
+.Preview__submit {
+  margin: 2em;
+  text-align: center;
+}
+.Preview__submit a {
+  background: gray;
+  padding: 1em;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+}
+.Preview__Image {
+  display: flex;
+  margin-bottom: 1em;
+  flex-direction: row;
+  height: 6em;
+  align-items: center;
+  background: #efefef;
+
+  cursor: move;
+  cursor: grab;
+}
+
+.Preview__Image__thumbnail {
+  height: 6em;
+  width: 9em;
+  background-size: cover;
+  background-position: center;
+}
+.Preview__Image__legend {
+  margin-left: 1em;
+}
+
+.Preview__Image.grabbing {
+  pointer-events: auto !important;
+  cursor: grabbing !important;
+  cursor: -moz-grabbing !important;
+  cursor: -webkit-grabbing !important;
+  box-shadow: 3px 3px 5px #ccc;
+}

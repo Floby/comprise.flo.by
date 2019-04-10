@@ -1,0 +1,17 @@
+.ImageImporter_dropzone {
+  min-height: 40vh;
+  background-color: #666;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ImageImporter_dropzone.dragging {
+  background: #999;
+}
+
+.ImageImporter_dropzone .legend {
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 120%;
+}
