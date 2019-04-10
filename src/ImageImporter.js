@@ -1,14 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import './ImageImporter.css'
 
 export default function ImageImporter ({ onImages }) {
   onImages = onImages || noop
-
+  const [ isProcessing, setIsProcessing ] = useState(false)
   const onDrop = useCallback(async (files) => {
-    const items = await mapFilesToImagesItems(files)
-    let key = 0
-    const images = items.filter(Boolean).map((image) => ({ key: key++, ...image }))
+    setIsProcessing(true)
+    const images = await mapFilesToImagesItems(files)
+    setIsProcessing(false)
     onImages(images)
   })
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -16,18 +16,33 @@ export default function ImageImporter ({ onImages }) {
   if (isDragActive) {
     topClassName += ' dragging'
   }
-  return (
-    <div className={topClassName} {...getRootProps()}>
-      <input {...getInputProps()} />
-      <span className="legend">
-      { isDragActive ? 'Lache tout !' : 'Dépose tes images ici' }
-      </span>
-    </div>
-  )
+
+  return isProcessing ? processing() : dropZone()
+
+  function dropZone () {
+    return (
+      <div className={topClassName} {...getRootProps()}>
+        <input {...getInputProps()} />
+        <span className="legend">
+        { isDragActive ? 'Lache tout !' : 'Dépose tes images ici' }
+        </span>
+      </div>
+    )
+  }
+  function processing () {
+    return (
+      <div className={topClassName}>
+        <span className="legend">
+          Chargement...
+        </span>
+      </div>
+    )
+  }
 }
 
 async function mapFilesToImagesItems (files) {
-  return await Promise.all(files.map((file) => mapFileToImageItem(file)))
+  const items = await Promise.all(files.map((file) => mapFileToImageItem(file)))
+  return items.filter(Boolean).map((image, key) => ({ key, ...image }))
 }
 
 async function mapFileToImageItem (file) {
